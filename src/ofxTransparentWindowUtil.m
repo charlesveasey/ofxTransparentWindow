@@ -12,7 +12,7 @@
 #include "ofxTransparentWindowUtil.h"
 
 
-void removeWindowBarAndTitle(int transparentType) {
+void removeWindowBarAndTitle(int transparentType, int x, int y, int w, int h) {
 	
 	NSOpenGLContext * myContext = nil;
 	NSView *myView = nil;
@@ -22,17 +22,29 @@ void removeWindowBarAndTitle(int transparentType) {
 	myView = [ myContext view ];
 	window = [ myView window ];
 	
-	GLint opacity = 0;
-	[myContext setValues:&opacity forParameter:NSOpenGLCPSurfaceOpacity];
+
+    
+	//GLint opacity = 0;
+	//[myContext setValues:&opacity forParameter:NSOpenGLCPSurfaceOpacity];
 	
-	[window setOpaque:NO];
-	[window setBackgroundColor: [NSColor clearColor]];
+	//[window setOpaque:NO];
+	//[window setBackgroundColor: [NSColor clearColor]];
 	[window setHasShadow:NO];
 	
+    
+    
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[window setStyleMask:NSBorderlessWindowMask];
 	[pool release];
-	
+
+    NSScreen *mainScreen = [NSScreen mainScreen];
+    NSRect screenRect = [mainScreen visibleFrame];
+    
+    NSPoint pos;
+    pos.x = x;
+    pos.y = screenRect.size.height - h + 30 - y; // 30 is menu bar
+    [window setFrameOrigin:pos];
+    
 //	- (BOOL)isKeyWindow;
 //	- (BOOL)isMainWindow;
 //	- (BOOL)canBecomeKeyWindow;
@@ -55,6 +67,7 @@ void removeWindowBarAndTitle(int transparentType) {
 	}else {
 		[window setLevel: kCGNormalWindowLevel];
 	}
+    [window setLevel: kCGScreenSaverWindowLevel];
 			
 }
 
@@ -65,9 +78,9 @@ void updateView() {
 	myContext = [ NSOpenGLContext currentContext ];
 	myView = [ myContext view ];
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	[[NSColor colorWithDeviceRed:0.0f green:0.0f blue:0.0f alpha:0.0f] set]; //*
-	NSRectFill([myView bounds]);
-	[pool release];
+	//NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	//[[NSColor colorWithDeviceRed:0.0f green:0.0f blue:0.0f alpha:0.0f] set]; //*
+	//NSRectFill([myView bounds]);
+	//[pool release];
 
 }

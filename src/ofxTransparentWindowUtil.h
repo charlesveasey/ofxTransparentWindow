@@ -8,5 +8,5 @@
 
 #pragma once
 
-extern void removeWindowBarAndTitle(int transparentType);
+extern void removeWindowBarAndTitle(int transparentType, int x, int y, int w, int h);
 extern void updateView();

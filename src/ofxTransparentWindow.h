@@ -17,7 +17,7 @@ public:
 	static const int DESKTOPBG = 1;
 	static const int NORMAL = 2;	
 	
-	void afterMainSetup(int transparentType = 2);
+	void afterMainSetup(int transparentType = 2, int x=0, int y=0, int w=0, int h=0);
 	void update();
 	
 };

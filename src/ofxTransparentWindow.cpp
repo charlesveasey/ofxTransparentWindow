@@ -8,14 +8,14 @@
 
 #include "ofxTransparentWindow.h"
 
-//extern "C" {
+extern "C" {
 #include "ofxTransparentWindowUtil.h"
-//}
+}
 
-void ofxTransparentWindow::afterMainSetup(int transparentType) {
+void ofxTransparentWindow::afterMainSetup(int transparentType, int x, int y, int w, int h) {
 	
-	ofSetBackgroundAuto(false);	
-	removeWindowBarAndTitle(transparentType);	
+	//ofSetBackgroundAuto(false);
+	removeWindowBarAndTitle(transparentType, x, y, w, h);
 	
 }
 
